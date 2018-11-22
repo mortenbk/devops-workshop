@@ -4,7 +4,7 @@ EXPOSE 80
 
 FROM microsoft/dotnet:2.1-sdk AS build
 WORKDIR /src
-COPY ["HelloWorldApi/HelloWorldApi.csproj", "HelloWorldApi/"]
+COPY ["HelloWorldApi.csproj", "HelloWorldApi/"]
 RUN dotnet restore "HelloWorldApi/HelloWorldApi.csproj"
 COPY . .
 WORKDIR "/src/HelloWorldApi"
