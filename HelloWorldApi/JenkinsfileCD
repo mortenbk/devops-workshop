@@ -1,0 +1,32 @@
+pipeline {
+  agent none
+  stages {
+    stage('Docker build') {
+      agent any
+      steps {
+        sh 'docker build -t mortenkb/helloworldapi:latest worldapi'
+      }
+    }
+    stage('Stop existing container') {
+      agent any
+      steps {
+        script {
+          try {
+            sh  '''
+              docker rm -f worldapi
+            '''
+          }
+          catch (exc) {
+              echo 'Container was not running'
+          }
+        }
+      }
+    }
+    stage('Docker deploy') {
+      agent any
+      steps {
+        sh 'docker run -d --name=worldapi -p 8100:80 mortenkb/helloworldapi:latest'
+      }
+    }
+  }
+}
