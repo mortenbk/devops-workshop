@@ -4,7 +4,7 @@ pipeline {
     stage('Docker build') {
       agent any
       steps {
-        sh 'docker build -t mortenkb/helloworldapi:latest worldapi'
+        sh 'docker build -t mortenkb/helloworldapi:latest .'
       }
     }
     stage('Stop existing container') {
